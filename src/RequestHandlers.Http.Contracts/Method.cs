@@ -1,4 +1,4 @@
-namespace RequestHandlers.WebApi.Contracts
+namespace RequestHandlers.Http.Contracts
 {
     public enum Method
     {

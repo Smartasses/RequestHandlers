@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using RequestHandlers.WebApi.Contracts;
+using RequestHandlers.Http.Contracts;
 
 namespace RequestHandlers.WebApi.Core
 {
@@ -33,7 +33,7 @@ namespace RequestHandlers.WebApi.Core
                 CreateConstructor(type, requestProcessorField);
                 var someMethod = requestProcessorField.FieldType.GetMethod("Process").MakeGenericMethod(requestHandler.RequestType, requestHandler.ResponseType);
 
-                bool canHaveBody = actionInfo.HttpMethod == Method.Post || actionInfo.HttpMethod == Method.Put;
+                bool canHaveBody = actionInfo.Method == Method.Post || actionInfo.Method == Method.Put;
 
                 var routeVariablesPropertyInfo = requestHandler.RequestType.GetProperties().Where(x => x.CanWrite && x.GetCustomAttributes<FromRouteAttribute>().Any()).ToArray();
                 var routeVariables = routeVariablesPropertyInfo
@@ -75,17 +75,17 @@ namespace RequestHandlers.WebApi.Core
 
 
                 var httpMethodAttribute = 
-                    actionInfo.HttpMethod == Method.Post ? _webApiTypes.HttpPostAttribute :
-                    actionInfo.HttpMethod == Method.Delete ? _webApiTypes.HttpDeleteAttribute :
-                    actionInfo.HttpMethod == Method.Get ? _webApiTypes.HttpGetAttribute :
-                    actionInfo.HttpMethod == Method.Put ? _webApiTypes.HttpPutAttribute : 
+                    actionInfo.Method == Method.Post ? _webApiTypes.HttpPostAttribute :
+                    actionInfo.Method == Method.Delete ? _webApiTypes.HttpDeleteAttribute :
+                    actionInfo.Method == Method.Get ? _webApiTypes.HttpGetAttribute :
+                    actionInfo.Method == Method.Put ? _webApiTypes.HttpPutAttribute : 
                     null;
 
 
                 methodBuilder.SetCustomAttribute(new CustomAttributeBuilder(httpMethodAttribute.GetConstructor(Type.EmptyTypes), new object[0]));
                 methodBuilder.SetCustomAttribute(new CustomAttributeBuilder(_webApiTypes.ResponseTypeAttribute.GetConstructor(new[] {typeof(Type)}), new object[] { requestHandler.ResponseType}));
 
-                var route = new CustomAttributeBuilder(_webApiTypes.RouteAttribute.GetConstructor(new[] { typeof(string) }), new object[] { actionInfo.Route });
+                var route = new CustomAttributeBuilder(_webApiTypes.RouteAttribute.GetConstructor(new[] { typeof(string) }), new object[] { actionInfo.Url });
                 methodBuilder.SetCustomAttribute(route);
                 
                 var il = methodBuilder.GetILGenerator();

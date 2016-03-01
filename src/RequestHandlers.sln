@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestHandlers.WebApi.Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestHandlers.WebApi.Core", "RequestHandlers.WebApi.Core\RequestHandlers.WebApi.Core.csproj", "{FFE44987-A739-4E00-B064-EF0FBA087AA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestHandlers.WebApi.Contracts", "RequestHandlers.WebApi.Contracts\RequestHandlers.WebApi.Contracts.csproj", "{C1CD1041-DB3A-40C5-B831-206D5D8DB205}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestHandlers.Http.Contracts", "RequestHandlers.Http.Contracts\RequestHandlers.Http.Contracts.csproj", "{C1CD1041-DB3A-40C5-B831-206D5D8DB205}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -146,9 +146,9 @@
     <Compile Include="WebApiProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RequestHandlers.WebApi.Contracts\RequestHandlers.WebApi.Contracts.csproj">
+    <ProjectReference Include="..\RequestHandlers.Http.Contracts\RequestHandlers.Http.Contracts.csproj">
       <Project>{C1CD1041-DB3A-40C5-B831-206D5D8DB205}</Project>
-      <Name>RequestHandlers.WebApi.Contracts</Name>
+      <Name>RequestHandlers.Http.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\RequestHandlers.WebApi.Core\RequestHandlers.WebApi.Core.csproj">
       <Project>{FFE44987-A739-4E00-B064-EF0FBA087AA7}</Project>
