@@ -70,8 +70,10 @@ namespace RequestHandlers.WebApi.Core
                     var routeVariable = routeVariables[index];
                     methodBuilder.DefineParameter(index + 1, ParameterAttributes.None, routeVariable.Name);
                 }
-                methodBuilder.DefineParameter(index + 1, ParameterAttributes.None, "request");
-
+                if (canHaveBody)
+                {
+                    methodBuilder.DefineParameter(index + 1, ParameterAttributes.None, "request");
+                }
 
 
                 var httpMethodAttribute = 
