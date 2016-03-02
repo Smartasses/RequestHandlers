@@ -16,6 +16,9 @@
     <tags>RequestHandlers request response</tags>
   <dependencies>
     <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3" />
+    <dependency id="RequestHandlers.Http.Contracts" version="$Build.BuildNumber$$VersionSuffix$" />
+    <dependency id="RequestHandlers.WebApi.Core" version="$Build.BuildNumber$$VersionSuffix$" />
+    <dependency id="RequestHandlers" version="$Build.BuildNumber$$VersionSuffix$" />
   </dependencies>
   </metadata>
   <files>

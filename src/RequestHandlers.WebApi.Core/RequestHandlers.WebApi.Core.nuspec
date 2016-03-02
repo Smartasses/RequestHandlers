@@ -14,7 +14,12 @@
     <releaseNotes></releaseNotes>
     <copyright>Copyright 2016</copyright>
     <tags>RequestHandlers request response</tags>
+    <dependencies>
+      <dependency id="RequestHandlers.Http.Contracts" version="$Build.BuildNumber$$VersionSuffix$" />
+      <dependency id="RequestHandlers" version="$Build.BuildNumber$$VersionSuffix$" />
+    </dependencies>
   </metadata>
+  
   <files>
     <!-- 4.6.1 -->
     <file src="bin\Release\net461\RequestHandlers.WebApi.Core.dll" target="lib\net461\RequestHandlers.WebApi.Core.dll" />
