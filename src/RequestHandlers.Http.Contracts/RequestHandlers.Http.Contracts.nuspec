@@ -17,7 +17,7 @@
   </metadata>
   <files>
     <!-- 4.6.1 -->
-    <file src="bin\Release\net461\RequestHandlers.Http.Contracts.exe" target="lib\net461\RequestHandlers.Http.Contracts.exe" />
+    <file src="bin\Release\net461\RequestHandlers.Http.Contracts.dll" target="lib\net461\RequestHandlers.Http.Contracts.dll" />
     <file src="bin\Release\net461\RequestHandlers.Http.Contracts.pdb" target="lib\net461\RequestHandlers.Http.Contracts.pdb" />
   </files>
 </package>

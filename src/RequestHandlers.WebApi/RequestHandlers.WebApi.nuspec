@@ -17,7 +17,10 @@
   </metadata>
   <files>
     <!-- 4.6.1 -->
-    <file src="bin\Release\net461\RequestHandlers.WebApi.exe" target="lib\net461\RequestHandlers.WebApi.exe" />
+    <file src="bin\Release\net461\RequestHandlers.WebApi.dll" target="lib\net461\RequestHandlers.WebApi.dll" />
     <file src="bin\Release\net461\RequestHandlers.WebApi.pdb" target="lib\net461\RequestHandlers.WebApi.pdb" />
   </files>
+  <dependencies>
+    <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3" />
+  </dependencies>
 </package>

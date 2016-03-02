@@ -17,7 +17,7 @@
   </metadata>
   <files>
     <!-- 4.6.1 -->
-    <file src="bin\Release\net461\RequestHandlers.WebApi.Core.exe" target="lib\net461\RequestHandlers.WebApi.Core.exe" />
+    <file src="bin\Release\net461\RequestHandlers.WebApi.Core.dll" target="lib\net461\RequestHandlers.WebApi.Core.dll" />
     <file src="bin\Release\net461\RequestHandlers.WebApi.Core.pdb" target="lib\net461\RequestHandlers.WebApi.Core.pdb" />
   </files>
 </package>

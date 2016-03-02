@@ -17,7 +17,7 @@
   </metadata>
   <files>
     <!-- 4.6.1 -->
-    <file src="bin\Release\net461\RequestHandlers.exe" target="lib\net461\RequestHandlers.exe" />
+    <file src="bin\Release\net461\RequestHandlers.dll" target="lib\net461\RequestHandlers.dll" />
     <file src="bin\Release\net461\RequestHandlers.pdb" target="lib\net461\RequestHandlers.pdb" />
   </files>
 </package>
