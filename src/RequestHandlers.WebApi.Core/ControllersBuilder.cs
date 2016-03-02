@@ -12,7 +12,7 @@ namespace RequestHandlers.WebApi.Core
             var moduleName = $"{assemblyName.Name}.dll";
 
             var assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
-            var moduleBuilder = assembly.DefineDynamicModule(moduleName, assemblyName.Name + ".dll", true);
+            var moduleBuilder = assembly.DefineDynamicModule(moduleName);
             var controllerBuilder = new ControllerBuilder(moduleBuilder, webApiRequestProcessor, webApiTypes);
             foreach (var requestHandlerDefinition in requestHandlers)
             {

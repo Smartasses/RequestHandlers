@@ -14,13 +14,13 @@
     <releaseNotes></releaseNotes>
     <copyright>Copyright 2016</copyright>
     <tags>RequestHandlers request response</tags>
+  <dependencies>
+    <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3" />
+  </dependencies>
   </metadata>
   <files>
     <!-- 4.6.1 -->
     <file src="bin\Release\net461\RequestHandlers.WebApi.dll" target="lib\net461\RequestHandlers.WebApi.dll" />
     <file src="bin\Release\net461\RequestHandlers.WebApi.pdb" target="lib\net461\RequestHandlers.WebApi.pdb" />
   </files>
-  <dependencies>
-    <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3" />
-  </dependencies>
 </package>
