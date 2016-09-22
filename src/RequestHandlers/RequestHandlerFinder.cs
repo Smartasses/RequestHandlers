@@ -7,15 +7,20 @@ namespace RequestHandlers
 {
     public static class RequestHandlerFinder
     {
-        public static RequestHandlerDefinition[] InAssembly(Assembly[] assemblies)
+        public static RequestHandlerDefinition[] InAssembly(params Assembly[] assemblies)
         {
             return assemblies.SelectMany(x => x.GetTypes())
-                .Where(x => x.IsClass && !x.IsAbstract && !x.IsInterface && !x.IsGenericTypeDefinition)
-                .SelectMany(GetRequestHandlerInterfaces,
+                .Select(x => new
+                {
+                    Type = x,
+                    TypeInfo = x.GetTypeInfo()
+                })
+                .Where(x => x.TypeInfo.IsClass && !x.TypeInfo.IsAbstract && !x.TypeInfo.IsInterface && !x.TypeInfo.IsGenericTypeDefinition)
+                .SelectMany(x => GetRequestHandlerInterfaces(x.Type),
                     (type, definition) =>
                         new RequestHandlerDefinition
                         {
-                            RequestHandlerType = type,
+                            RequestHandlerType = type.Type,
                             RequestType = definition.Item1,
                             ResponseType = definition.Item2
                         }).ToArray();
@@ -23,10 +28,10 @@ namespace RequestHandlers
 
         private static IEnumerable<Tuple<Type, Type>> GetRequestHandlerInterfaces(Type type)
         {
-            var requestHandlers = type.GetInterfaces().Where(x => !x.IsGenericTypeDefinition && x.IsGenericType && x.GetGenericTypeDefinition() == typeof(IRequestHandler<,>));
+            var requestHandlers = type.GetTypeInfo().GetInterfaces().Where(x => !x.GetTypeInfo().IsGenericTypeDefinition && x.GetTypeInfo().IsGenericType && x.GetGenericTypeDefinition() == typeof(IRequestHandler<,>));
             foreach (var requestHandler in requestHandlers)
             {
-                var typeArguments = requestHandler.GetGenericArguments();
+                var typeArguments = requestHandler.GetTypeInfo().GetGenericArguments();
                 yield return Tuple.Create(typeArguments[0], typeArguments[1]);
             }
         }

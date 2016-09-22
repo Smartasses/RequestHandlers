@@ -2,8 +2,12 @@
 
 namespace RequestHandlers
 {
-
-    public class RequestHandlerDefinition
+    public interface IRequestDefinition
+    {
+        Type RequestType { get; set; }
+        Type ResponseType { get; set; }
+    }
+    public class RequestHandlerDefinition : IRequestDefinition
     {
         public Type RequestType { get; set; }
         public Type ResponseType { get; set; }
