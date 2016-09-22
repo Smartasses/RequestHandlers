@@ -48,10 +48,6 @@
     <Compile Include="WebApiTypes.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RequestHandlers.Http.Contracts\RequestHandlers.Http.Contracts.csproj">
-      <Project>{C1CD1041-DB3A-40C5-B831-206D5D8DB205}</Project>
-      <Name>RequestHandlers.Http.Contracts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\RequestHandlers\RequestHandlers.csproj">
       <Project>{9F636E73-BB5E-451D-8E0E-4B6E2B0DA4A1}</Project>
       <Name>RequestHandlers</Name>

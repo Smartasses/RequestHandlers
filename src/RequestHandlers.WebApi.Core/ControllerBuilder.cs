@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using RequestHandlers.Http.Contracts;
+using RequestHandlers.Rest;
 
 namespace RequestHandlers.WebApi.Core
 {
@@ -57,9 +57,6 @@ namespace RequestHandlers.WebApi.Core
                     {
                         requestType = requestHandler.RequestType;
                     }
-                }
-                if (canHaveBody)
-                {
                     actionParameters = actionParameters.Concat(new[] { requestType });
                 }
 

@@ -50,6 +50,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DefaultRequestProcessor.cs" />
     <Compile Include="RequestHandlerFinder.cs" />
+    <Compile Include="Rest\FromRouteAttribute.cs" />
+    <Compile Include="Rest\HttpActionAttribute.cs" />
+    <Compile Include="Rest\Method.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="RequestHandlers.nuspec" />

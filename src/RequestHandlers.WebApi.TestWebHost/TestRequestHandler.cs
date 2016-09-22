@@ -1,5 +1,5 @@
 using System;
-using RequestHandlers.Http.Contracts;
+using RequestHandlers.Rest;
 
 namespace RequestHandlers.WebApi.TestWebHost
 {
