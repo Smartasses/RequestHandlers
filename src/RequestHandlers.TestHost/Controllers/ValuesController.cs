@@ -10,7 +10,7 @@ namespace RequestHandlers.TestHost.Controllers
     {
         // GET api/values
         [HttpGet("api/Values")]
-        public IEnumerable<string> Get()
+        public IEnumerable<string> Get([FromQuery()]string test)
         {
             return new string[] { "value1", "value2" };
         }

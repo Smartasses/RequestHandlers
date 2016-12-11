@@ -17,7 +17,9 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "RequestHandlers": "1.0.0-*",
     "Microsoft.CodeAnalysis.CSharp": "1.3.2",
-    "System.Runtime.Loader": "4.0.0"
+    "System.Runtime.Loader": "4.0.0",
+    "Swashbuckle": "6.0.0-beta902",
+    "RequestHandlers.Mvc": "1.0.0-*"
   },
 
   "tools": {
