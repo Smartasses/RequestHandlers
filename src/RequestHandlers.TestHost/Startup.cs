@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using RequestHandlers.Mvc;
 using RequestHandlers.TestHost.RequestHandlers;
 
 namespace RequestHandlers.TestHost
@@ -39,7 +40,9 @@ namespace RequestHandlers.TestHost
                 services.Add(new ServiceDescriptor(requestHandlerInterface.MakeGenericType(requestHandler.RequestType, requestHandler.ResponseType), requestHandler.RequestHandlerType, ServiceLifetime.Transient));
             }
             // Add framework services.
-            services.AddMvc().AddApplicationPart(DynamicBuilder.Build(RequestHandlerFinder.InAssembly(GetType().GetTypeInfo().Assembly)));
+            
+            var mvc = services.AddMvc();
+            mvc.AddApplicationPart(RequestHandlerControllerBuilder.Build(RequestHandlerFinder.InAssembly(GetType().GetTypeInfo().Assembly)));
 
             // Inject an implementation of ISwaggerProvider with defaulted settings applied
             services.AddSwaggerGen();
