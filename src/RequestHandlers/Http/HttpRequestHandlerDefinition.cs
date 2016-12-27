@@ -1,14 +1,13 @@
 ﻿using System.Linq;
 using System.Reflection;
-using RequestHandlers.Http;
 
-namespace RequestHandlers.Mvc
+namespace RequestHandlers.Http
 {
-    public class HttpRequestHandlerControllerDefinition
+    public class HttpRequestHandlerDefinition
     {
-        public HttpRequestHandlerControllerDefinition(HttpRequestAttribute attribute, IRequestDefinition definition)
+        public HttpRequestHandlerDefinition(HttpRequestAttribute attribute, IRequestDefinition definition)
         {
-            var parsedRoute = HttpRequestAttributeParser.Parse(attribute);
+            var parsedRoute = attribute.Parse();
 
             var isFormRequest = definition.RequestType.GetTypeInfo().GetCustomAttribute<Http.FromFormAttribute>() != null;
 
@@ -25,7 +24,7 @@ namespace RequestHandlers.Mvc
                         : BindingType.FromBody
                     : BindingType.FromQuery;
 
-            var binderHelper = new PropertyBinderHelper(defaultBinder, parsedRoute);
+            var binderHelper = new HttpRequestPropertyBinderHelper(defaultBinder, parsedRoute);
             var allProperties = definition.RequestType.GetProperties(bindingFlags);
             foreach (var propertyInfo in allProperties)
             {
@@ -43,6 +42,6 @@ namespace RequestHandlers.Mvc
 
         public HttpMethod HttpMethod { get; set; }
 
-        public PropertyBinderHelperResult[] Parameters { get; }
+        public HttpPropertyBinding[] Parameters { get; }
     }
 }

@@ -23,7 +23,7 @@ namespace RequestHandlers.Mvc.CSharp
             _assemblyName = assemblyName;
         }
         
-        public Assembly Build(HttpRequestHandlerControllerDefinition[] definitions)
+        public Assembly Build(HttpRequestHandlerDefinition[] definitions)
         {
             var references = new AssemblyReferencesHelper()
                 .AddReferenceForTypes(typeof(object), typeof(Controller), typeof(RequestHandlerControllerBuilder))
@@ -71,7 +71,7 @@ namespace RequestHandlers.Mvc.CSharp
             } while (_classNames.Contains(className));
             return className;
         }
-        public IEnumerable<string> CreateCSharp(string className, HttpRequestHandlerControllerDefinition builderDefinition)
+        public IEnumerable<string> CreateCSharp(string className, HttpRequestHandlerDefinition builderDefinition)
         {
             yield return "namespace Proxy";
             yield return "{";
@@ -89,7 +89,7 @@ namespace RequestHandlers.Mvc.CSharp
                 yield return "    }";
             }
 
-            var methodArgs = string.Join(",  ", builderDefinition.Parameters.GroupBy(x => x.ParameterName).Select(x => new
+            var methodArgs = string.Join(",  ", builderDefinition.Parameters.GroupBy(x => x.PropertyName).Select(x => new
             {
                 Name = x.Key,
                 Type = x.First().BindingType == BindingType.FromBody || x.First().BindingType == BindingType.FromForm ? requestClass : x.First().PropertyInfo.PropertyType.FullName,
@@ -113,7 +113,7 @@ namespace RequestHandlers.Mvc.CSharp
             foreach (var assignment in builderDefinition.Parameters)
             {
                 var fromRequest = assignment.BindingType == BindingType.FromBody || assignment.BindingType == BindingType.FromForm;
-                yield return $"                {assignment.PropertyInfo.Name} = {assignment.ParameterName}{(fromRequest ? $".{assignment.PropertyInfo.Name}" : "")},";
+                yield return $"                {assignment.PropertyInfo.Name} = {assignment.PropertyName}{(fromRequest ? $".{assignment.PropertyInfo.Name}" : "")},";
             }
             yield return "            };";
             yield return $"            var response = _requestDispatcher.Process<{builderDefinition.Definition.RequestType.FullName},{builderDefinition.Definition.ResponseType.FullName}>({requestVariable});";

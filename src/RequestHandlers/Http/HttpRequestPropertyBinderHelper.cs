@@ -2,26 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using RequestHandlers.Http;
 
-namespace RequestHandlers.Mvc
+namespace RequestHandlers.Http
 {
-    public class PropertyBinderHelperResult
+    public class HttpPropertyBinding
     {
         public PropertyInfo PropertyInfo { get; set; }
         public BindingType BindingType { get; set; }
-        public string ParameterName { get; set; }
+        public string PropertyName { get; set; }
     }
-    class PropertyBinderHelper
+    class HttpRequestPropertyBinderHelper
     {
         
         private readonly BindingType _defaultBinder;
-        private readonly HttpRequestAttributeParser.Result _parsedRouteResult;
-        private readonly List<PropertyBinderHelperResult> _results;
+        private readonly HttpRequestAttribute.Result _parsedRouteResult;
+        private readonly List<HttpPropertyBinding> _results;
 
-        public PropertyBinderHelper(BindingType defaultBinder, HttpRequestAttributeParser.Result parsedRouteResult)
+        public HttpRequestPropertyBinderHelper(BindingType defaultBinder, HttpRequestAttribute.Result parsedRouteResult)
         {
-            _results = new List<PropertyBinderHelperResult>();
+            _results = new List<HttpPropertyBinding>();
             _defaultBinder = defaultBinder;
             _parsedRouteResult = parsedRouteResult;
         }
@@ -32,26 +31,26 @@ namespace RequestHandlers.Mvc
             var binder = GetAutoBinderTypeFromRoute(propertyInfo);
             if(binder != null && attributeBinderType.HasValue && binder.BindingType != attributeBinderType) throw new Exception("Autobinder doesn't match attribute binder.");
 
-            _results.Add(new PropertyBinderHelperResult
+            _results.Add(new HttpPropertyBinding
             {
                 PropertyInfo = propertyInfo,
                 BindingType = attributeBinderType ?? binder?.BindingType ?? _defaultBinder,
-                ParameterName = binder?.ParameterName
+                PropertyName = binder?.PropertyName
             });
         }
 
-        public IEnumerable<PropertyBinderHelperResult> GetPropertiesAndBinding()
+        public IEnumerable<HttpPropertyBinding> GetPropertiesAndBinding()
         {
-            foreach (var result in _results.Where(x => string.IsNullOrEmpty(x.ParameterName) && x.BindingType != BindingType.FromBody && x.BindingType != BindingType.FromForm))
+            foreach (var result in _results.Where(x => string.IsNullOrEmpty(x.PropertyName) && x.BindingType != BindingType.FromBody && x.BindingType != BindingType.FromForm))
             {
                 var parameterName = ConvertToCamelCase(result.PropertyInfo.Name);
-                result.ParameterName = GetUniqueParameterName(parameterName);
+                result.PropertyName = GetUniqueParameterName(parameterName);
             }
             {
                 var requestBodyParameterName = GetUniqueParameterName("request");
                 foreach (var result in _results.Where(x => x.BindingType == BindingType.FromBody || x.BindingType == BindingType.FromForm))
                 {
-                    result.ParameterName = requestBodyParameterName;
+                    result.PropertyName = requestBodyParameterName;
                 }
             }
             return _results;
@@ -64,7 +63,7 @@ namespace RequestHandlers.Mvc
             for (var duplicates = 0; iterate; duplicates++)
             {
                 var tryName = $"{parameterName}{(duplicates > 0 ? duplicates.ToString() : "")}";
-                if (_results.All(x => x.ParameterName != tryName))
+                if (_results.All(x => x.PropertyName != tryName))
                 {
                     uniqueParameterName = tryName;
                     iterate = false;
@@ -73,7 +72,7 @@ namespace RequestHandlers.Mvc
             return uniqueParameterName;
         }
 
-        private PropertyBinderHelperResult GetAutoBinderTypeFromRoute(PropertyInfo propertyInfo)
+        private HttpPropertyBinding GetAutoBinderTypeFromRoute(PropertyInfo propertyInfo)
         {
             var routeNameCorrectCase = _parsedRouteResult.RouteVariable.SingleOrDefault(x => x.Equals(propertyInfo.Name, StringComparison.CurrentCulture));
             var queryStringNameCorrectCase = _parsedRouteResult.QueryStringVariables.SingleOrDefault(x => x.Equals(propertyInfo.Name, StringComparison.CurrentCulture));
@@ -82,18 +81,18 @@ namespace RequestHandlers.Mvc
             
             if (routeNameCorrectCase != null || routeNameIgnoreCase != null)
             {
-                return new PropertyBinderHelperResult
+                return new HttpPropertyBinding
                 {
                     BindingType = BindingType.FromRoute,
-                    ParameterName = routeNameCorrectCase ?? routeNameIgnoreCase
+                    PropertyName = routeNameCorrectCase ?? routeNameIgnoreCase
                 };
             }
             else if (queryStringNameCorrectCase != null || queryStringNameIgnoreCase != null)
             {
-                return new PropertyBinderHelperResult
+                return new HttpPropertyBinding
                 {
                     BindingType = BindingType.FromQuery,
-                    ParameterName = queryStringNameCorrectCase ?? queryStringNameIgnoreCase
+                    PropertyName = queryStringNameCorrectCase ?? queryStringNameIgnoreCase
                 };
             }
             return null;

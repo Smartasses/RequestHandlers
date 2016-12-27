@@ -1,9 +1,10 @@
 ﻿using System.Reflection;
+using RequestHandlers.Http;
 
 namespace RequestHandlers.Mvc
 {
     public interface IControllerAssemblyBuilder
     {
-        Assembly Build(HttpRequestHandlerControllerDefinition[] definitions);
+        Assembly Build(HttpRequestHandlerDefinition[] definitions);
     }
 }

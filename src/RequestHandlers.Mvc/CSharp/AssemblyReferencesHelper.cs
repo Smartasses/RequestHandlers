@@ -16,7 +16,7 @@ namespace RequestHandlers.Mvc.CSharp
         }
         public AssemblyReferencesHelper AddReferenceForTypes(params Type[] types)
         {
-            types.Select(x => IntrospectionExtensions.GetTypeInfo(x).Assembly)
+            types.Select(x => x.GetTypeInfo().Assembly)
                 .Distinct()
                 .ToList().ForEach(AddAssembly);
             return this;

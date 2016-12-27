@@ -15,7 +15,7 @@ namespace RequestHandlers.Mvc
                     x.RequestType.GetTypeInfo()
                         .GetCustomAttributes(true)
                         .OfType<HttpRequestAttribute>()
-                        .Select(d => new HttpRequestHandlerControllerDefinition(d, x))
+                        .Select(d => new HttpRequestHandlerDefinition(d, x))
                 )
                 .ToArray();
             return controllerAssemblyBuilder.Build(controllerDefinitions);
