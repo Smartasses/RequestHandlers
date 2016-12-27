@@ -2,6 +2,7 @@
   "version": "1.0.0-*",
 
   "dependencies": {
+    "dotnet-version": "1.2.0",
     "NETStandard.Library": "1.6.1",
     "System.Reflection.TypeExtensions": "4.3.0"
   },
@@ -12,6 +13,5 @@
     }
   },
   "tools": {
-    "dotnet-version": "1.1.0"
   }
 }
