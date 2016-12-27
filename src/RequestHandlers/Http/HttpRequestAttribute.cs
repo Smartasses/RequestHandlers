@@ -21,14 +21,16 @@ namespace RequestHandlers.Http
             public List<string> RouteVariable { get; set; }
             public List<string> QueryStringVariables { get; set; }
         }
+        public string ServiceName { get; set; }
 
         public string Route { get; set; }
         public HttpMethod HttpMethod { get; set; }
 
-        public HttpRequestAttribute(string route, HttpMethod httpMethod)
+        public HttpRequestAttribute(string route, HttpMethod httpMethod, string serviceName = null)
         {
             Route = route;
             HttpMethod = httpMethod;
+            ServiceName = serviceName;
         }
 
 
@@ -93,35 +95,35 @@ namespace RequestHandlers.Http
     [AttributeUsage(AttributeTargets.Class)]
     public class GetRequestAttribute : HttpRequestAttribute
     {
-        public GetRequestAttribute(string route) : base(route, HttpMethod.Get)
+        public GetRequestAttribute(string route, string serviceName = null) : base(route, HttpMethod.Get, serviceName)
         {
         }
     }
     [AttributeUsage(AttributeTargets.Class)]
     public class PatchRequestAttribute : HttpRequestAttribute
     {
-        public PatchRequestAttribute(string route) : base(route, HttpMethod.Patch)
+        public PatchRequestAttribute(string route, string serviceName = null) : base(route, HttpMethod.Patch, serviceName)
         {
         }
     }
     [AttributeUsage(AttributeTargets.Class)]
     public class PostRequestAttribute : HttpRequestAttribute
     {
-        public PostRequestAttribute(string route) : base(route, HttpMethod.Post)
+        public PostRequestAttribute(string route, string serviceName = null) : base(route, HttpMethod.Post, serviceName)
         {
         }
     }
     [AttributeUsage(AttributeTargets.Class)]
     public class PutRequestAttribute : HttpRequestAttribute
     {
-        public PutRequestAttribute(string route) : base(route, HttpMethod.Put)
+        public PutRequestAttribute(string route, string serviceName = null) : base(route, HttpMethod.Put, serviceName)
         {
         }
     }
     [AttributeUsage(AttributeTargets.Class)]
     public class DeleteRequestAttribute : HttpRequestAttribute
     {
-        public DeleteRequestAttribute(string route) : base(route, HttpMethod.Delete)
+        public DeleteRequestAttribute(string route, string serviceName = null) : base(route, HttpMethod.Delete, serviceName)
         {
         }
     }

@@ -34,7 +34,15 @@ namespace RequestHandlers.Http
             HttpMethod = attribute.HttpMethod;
             Route = parsedRoute.Route;
             Definition = definition;
+            ServiceName = attribute.ServiceName ?? definition.RequestType.Name + "Handler";
+            ActionName = definition.RequestType.Name.EndsWith("Request")
+                ? definition.RequestType.Name.Substring(0, definition.RequestType.Name.Length - "Request".Length)
+                : definition.RequestType.Name;
         }
+
+        public string ActionName { get; set; }
+
+        public string ServiceName { get; set; }
 
         public IRequestDefinition Definition { get; set; }
 
