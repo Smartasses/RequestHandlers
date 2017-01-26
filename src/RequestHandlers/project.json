@@ -7,22 +7,7 @@
       },
       "imports": "dnxcore50"
     },
-    "net46": {
-      "dependencies": {
-      },
-      "imports": "dnxcore50"
-    },
     "net452": {
-      "dependencies": {
-      },
-      "imports": "dnxcore50"
-    },
-    "net451": {
-      "dependencies": {
-      },
-      "imports": "dnxcore50"
-    },
-    "net45": {
       "dependencies": {
       },
       "imports": "dnxcore50"
