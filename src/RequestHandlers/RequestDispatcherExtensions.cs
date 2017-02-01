@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace RequestHandlers
 {
@@ -15,6 +16,12 @@ namespace RequestHandlers
         {
             return (TResponse)MainMethod
                 .MakeGenericMethod(request.GetType(), typeof(TResponse))
+                .Invoke(dispatcher, new object[] { request });
+        }
+        public static async Task<TResponse> ProcessAsync<TResponse>(this IRequestDispatcher dispatcher, IReturn<TResponse> request)
+        {
+            return await (Task<TResponse>)MainMethod
+                .MakeGenericMethod(request.GetType(), typeof(Task<TResponse>))
                 .Invoke(dispatcher, new object[] { request });
         }
     }
