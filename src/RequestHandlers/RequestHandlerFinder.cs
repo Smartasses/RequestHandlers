@@ -9,7 +9,7 @@ namespace RequestHandlers
     {
         public static RequestHandlerDefinition[] InAssembly(params Assembly[] assemblies)
         {
-            return assemblies.SelectMany(x => x.GetTypes())
+            return assemblies.SelectMany(x => x.GetLoadableTypes())
                 .Select(x => new
                 {
                     Type = x,
@@ -33,6 +33,19 @@ namespace RequestHandlers
             {
                 var typeArguments = requestHandler.GetTypeInfo().GetGenericArguments();
                 yield return Tuple.Create(typeArguments[0], typeArguments[1]);
+            }
+        }
+        
+        public static IEnumerable<Type> GetLoadableTypes(this Assembly assembly)
+        {
+            if (assembly == null) throw new ArgumentNullException(nameof(assembly));
+            try
+            {
+                return assembly.GetTypes();
+            }
+            catch (ReflectionTypeLoadException e)
+            {
+                return e.Types.Where(t => t != null);
             }
         }
     }
