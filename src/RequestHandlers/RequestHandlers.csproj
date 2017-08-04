@@ -4,14 +4,20 @@
     <TargetFrameworks>net461;net452;net45;netstandard1.6</TargetFrameworks>
     <AssemblyName>RequestHandlers</AssemblyName>
     <PackageId>RequestHandlers</PackageId>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <Authors>Glenn Dierckx, Benny Michielsen</Authors>
+    <Description>RequestHandlers</Description>
+    <PackageProjectUrl>https://github.com/Smartasses/RequestHandlers</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Smartasses/RequestHandlers</RepositoryUrl>
     <PackageTargetFallback Condition=" '$(TargetFramework)' == 'net461' ">$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
     <PackageTargetFallback Condition=" '$(TargetFramework)' == 'net452' ">$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
     <PackageTargetFallback Condition=" '$(TargetFramework)' == 'net45' ">$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
     <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netstandard1.6' ">$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
     <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.6' ">1.6.1</NetStandardImplicitPackageVersion>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <AssemblyOriginatorKeyFile>../../build/sn.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>True</SignAssembly>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
