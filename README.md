@@ -1,5 +1,5 @@
 # RequestHandlers
-[![NuGet](https://img.shields.io/nuget/v/RequestHandler.svg?style=flat-square&label=nuget)](https://www.nuget.org/packages/RequestHandler/)
+[![NuGet](https://img.shields.io/nuget/v/RequestHandlers.svg?style=flat-square&label=nuget)](https://www.nuget.org/packages/RequestHandlers/)
 
 RequestHandlers is a framework that helps you structure your code into small, easy-to-test units of work.
 
