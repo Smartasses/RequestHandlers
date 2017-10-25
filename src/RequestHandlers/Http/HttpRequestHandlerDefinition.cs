@@ -13,6 +13,7 @@ namespace RequestHandlers.Http
 
             var canHaveBody = attribute.HttpMethod == HttpMethod.Patch
                               || attribute.HttpMethod == HttpMethod.Post
+                              || attribute.HttpMethod == HttpMethod.Delete
                               || attribute.HttpMethod == HttpMethod.Put;
 
             var bindingFlags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.SetProperty | BindingFlags.GetProperty;
